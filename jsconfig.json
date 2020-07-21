@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "target": "ES6",
+    "baseUrl": "./app",
+    "paths": {
+      "Modules/*": ["modules/*"],
+      "App/*": ["./*"]
+    }
+  },
+  "exclude": [
+    "node_modules",
+    ".storybook",
+    "storybook-static",
+    "cypress",
+    "public/prod",
+    "public/trunk",
+    ".vscode",
+    "test"
+  ]
+}

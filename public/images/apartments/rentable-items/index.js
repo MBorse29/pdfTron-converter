@@ -1,0 +1,7 @@
+export { default as rent1 } from './rent1.jpg'
+export { default as rent2 } from './rent2.jpg'
+export { default as rent3 } from './rent3.jpg'
+export { default as rent4 } from './rent4.jpg'
+export { default as sofaset } from './sofaset.jpg'
+export { default as tv } from './tv.jpg'
+export { default as washerdryer } from './washerdryer.jpg'

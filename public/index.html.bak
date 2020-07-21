@@ -1,0 +1,31 @@
+Html Webpack Plugin:
+<pre>
+  Error: Child compilation failed:
+  Entry module not found: Error: Can't resolve '/Users/rjensen/Projects/rpreact/public/template.ejs' in '/Users/rjensen/Projects/rpreact':
+  Error: Can't resolve '/Users/rjensen/Projects/rpreact/public/template.ejs' in '/Users/rjensen/Projects/rpreact'
+  
+  - compiler.js:79 childCompiler.runAsChild
+    [rpreact]/[html-webpack-plugin]/lib/compiler.js:79:16
+  
+  - Compiler.js:306 compile
+    [rpreact]/[webpack]/lib/Compiler.js:306:11
+  
+  - Compiler.js:630 hooks.afterCompile.callAsync.err
+    [rpreact]/[webpack]/lib/Compiler.js:630:14
+  
+  
+  - Hook.js:154 AsyncSeriesHook.lazyCompileHook
+    [rpreact]/[tapable]/lib/Hook.js:154:20
+  
+  - Compiler.js:627 compilation.seal.err
+    [rpreact]/[webpack]/lib/Compiler.js:627:30
+  
+  
+  - Hook.js:154 AsyncSeriesHook.lazyCompileHook
+    [rpreact]/[tapable]/lib/Hook.js:154:20
+  
+  - Compilation.js:1325 hooks.optimizeAssets.callAsync.err
+    [rpreact]/[webpack]/lib/Compilation.js:1325:35
+  
+  
+</pre><script type="text/javascript" src="/client.a8a5f474fff0760ff1d4.js"></script>

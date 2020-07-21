@@ -1,0 +1,50 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "eslint-config-prettier"
+  ],
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true,
+    "jest": true
+  },
+  "plugins": ["import", "react"],
+  "rules": {
+    "no-console": 0,
+    "no-underscore-dangle": 1,
+    "no-unused-vars": [
+      "warn",
+      {
+        "ignoreRestSiblings": true
+      }
+    ],
+    "quotes": [
+      1,
+      "single",
+      {
+        "allowTemplateLiterals": true,
+        "avoidEscape": true
+      }
+    ],
+    "react/display-name": 0,
+    "react/no-danger": 1,
+    "react/prop-types": 1,
+    "no-useless-escape": 0,
+    "react/no-unescaped-entities": 0
+  },
+  "globals": {
+    "__": true,
+    "i18nUtils": true
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
+}
