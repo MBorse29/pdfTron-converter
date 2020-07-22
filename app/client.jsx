@@ -13,12 +13,28 @@ class App extends React.Component {
     this.instance = null
   }
 
+  wvDocumentLoadedHandler = () => {
+    // call methods relating to the loaded document
+    const { Annotations } = this.instance
+    const rectangle = new Annotations.RectangleAnnotation()
+    rectangle.PageNumber = 1
+    rectangle.X = 100
+    rectangle.Y = 100
+    rectangle.Width = 250
+    rectangle.Height = 250
+    rectangle.StrokeThickness = 5
+    rectangle.Author = this.annotManager.getCurrentUser()
+    this.annotManager.addAnnotation(rectangle)
+    this.annotManager.drawAnnotations(rectangle.PageNumber)
+    // see https://www.pdftron.com/api/web/WebViewer.html for the full list of low-level APIs
+  }
+
   componentDidMount() {
     window
       .WebViewer(
         {
           path: '/WebViewer/lib',
-          initialDoc: '/dummy.pdf',
+          initialDoc: '/sample.pdf',
           fullAPI: true,
         },
         document.getElementById('a'),
@@ -52,7 +68,8 @@ class App extends React.Component {
           console.log('annotations loaded')
         })
 
-        this.docViewer.on('documentLoaded', this.wvDocumentLoadedHandler)
+        // Draw rectangle on PDF
+        //this.docViewer.on('documentLoaded', this.wvDocumentLoadedHandler)
       })
   }
 
@@ -150,45 +167,36 @@ class App extends React.Component {
       })
   }
 
-  wvDocumentLoadedHandler = () => {
-    // call methods relating to the loaded document
-    const { Annotations } = this.instance
-    const rectangle = new Annotations.RectangleAnnotation()
-    rectangle.PageNumber = 1
-    rectangle.X = 100
-    rectangle.Y = 100
-    rectangle.Width = 250
-    rectangle.Height = 250
-    rectangle.StrokeThickness = 5
-    rectangle.Author = this.annotManager.getCurrentUser()
-    this.annotManager.addAnnotation(rectangle)
-    this.annotManager.drawAnnotations(rectangle.PageNumber)
-    // see https://www.pdftron.com/api/web/WebViewer.html for the full list of low-level APIs
-  }
-
   render() {
     return (
-      <div className='App' style={{ height: '90vh' }}>
-        <div className='header'>React sample</div>
-        <DropArea
-          allowMultiple
-          onFileSelection={files => {
-            this.onFileSelection(files)
-          }}
-        ></DropArea>
-
-        <div
-          className='webviewer'
-          id='a'
-          ref={this.viewer}
-          style={{
-            // height: '100%',
-            border: '1px solid',
-            height: 0,
-            position: 'absolute',
-            bottom: 0,
-          }}
-        />
+      <div
+        className='App'
+        style={{
+          height: '87vh',
+          display: 'flex',
+          justifyContent: 'space-between',
+        }}
+      >
+        <div>
+          <h3 style={{ marginTop: '150%', maxWidth: 180 }}>
+            Upload Document here to convert in PDF format
+          </h3>
+          <DropArea
+            allowMultiple
+            onFileSelection={files => {
+              this.onFileSelection(files)
+            }}
+          ></DropArea>
+        </div>
+        <div style={{ width: '90%' }}>
+          <h1>WebViewer</h1>
+          <div
+            className='webviewer'
+            id='a'
+            ref={this.viewer}
+            style={{ height: '100%', width: '100%', border: '1px solid' }}
+          />
+        </div>
       </div>
     )
   }
