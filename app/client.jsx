@@ -81,6 +81,11 @@ class App extends React.Component {
       const currentBlob = new Blob([arr], { type: 'application/pdf' })
       currentBlob.lastModifiedDate = new Date()
       // currentBlob.name = 'sampleDoc'
+
+      // Load Document in Webviewer
+      this.instance.loadDocument(currentBlob, { fileName: `${fileName}.pdf` })
+
+      // File Saver
       window.saveAs(currentBlob, fileName) // FileSaver.min.js
     })
 
@@ -128,6 +133,10 @@ class App extends React.Component {
       const currentBlob = new Blob([arr], { type: 'application/pdf' })
       currentBlob.lastModifiedDate = new Date()
 
+      // Load Document in Webviewer
+      this.instance.loadDocument(currentBlob, { fileName: `${fileName}.pdf` })
+
+      // File Saver
       window.saveAs(currentBlob, fileName)
     }
   }
