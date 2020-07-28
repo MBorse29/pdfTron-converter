@@ -4,6 +4,7 @@ import { render } from 'react-dom'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import ViewerAndUploader from './ViewerAndUploader'
 import Viewer from './Viewer'
+import UploaderConverter from './UploaderConverter'
 
 const Application = () => {
   return (
@@ -32,7 +33,7 @@ const Application = () => {
             <ViewerAndUploader />
           </Route>
           <Route path='/uploader'>
-            <div>Uploader + Converter</div>
+            <UploaderConverter />
           </Route>
           <Route path='/'>
             <Viewer />
