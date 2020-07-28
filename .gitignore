@@ -42,25 +42,25 @@ node_modules
 # # Docker stuff
 # jest_0
 
-# # Build directories
-# dist
-# public
-#  public/dist
+# Build directories
+dist
+public/*
+ public/dist
  public/build/*
-# public/prod
-# public/*.js
-# public/*.css
-# public/index.html
-# /public/build
-# /public/*.js
-# /public/*.css
-# /public/index.html
-# /public/trunk
-# /public/prod
-# /public/dist
-# # editor things
-# .tern-project
-# .vscode
+public/prod
+public/*.js
+public/*.css
+public/index.html
+/public/build
+/public/*.js
+/public/*.css
+/public/index.html
+/public/trunk
+/public/prod
+/public/dist
+# editor things
+.tern-project
+.vscode
 
 # # yarn/npm things
 # .npmrc
