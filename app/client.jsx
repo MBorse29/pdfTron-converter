@@ -2,9 +2,9 @@ import '@babel/polyfill'
 import React from 'react'
 import { render } from 'react-dom'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
-import ViewerAndUploader from './ViewerAndUploader'
-import Viewer from './Viewer'
-import UploaderConverter from './UploaderConverter'
+import VandU from './VandU'
+// import Viewer from './Viewer'
+import ViewerWithMultipleDocs from './ViewerWithMultipleDocs'
 
 const Application = () => {
   return (
@@ -30,13 +30,27 @@ const Application = () => {
           renders the first one that matches the current URL. */}
         <Switch>
           <Route path='/viewPlusUpload'>
-            <ViewerAndUploader />
+            <VandU
+              // hideViewer
+              // downloadOnConvert
+              loadOnConvert
+              onFilesConvert={blobs => console.log('blobs', blobs)}
+              styles={{
+                parent: { padding: 20 },
+                uploader: { marginBottom: 20 },
+                viewer: { height: 'calc(100vh - 250px)' },
+              }}
+            />
           </Route>
           <Route path='/uploader'>
-            <UploaderConverter />
+            <VandU
+              hideViewer
+              onFilesConvert={blobs => console.log('blobs', blobs)}
+            />
           </Route>
           <Route path='/'>
-            <Viewer />
+            <ViewerWithMultipleDocs />
+            {/* <Viewer /> */}
           </Route>
         </Switch>
       </div>

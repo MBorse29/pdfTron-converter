@@ -2,24 +2,37 @@ import React, { useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { DropArea } from './DropArea'
 
-const UploaderConverter = () => {
+const VandU = ({
+  styles,
+  hideViewer,
+  downloadOnConvert,
+  loadOnConvert,
+  initialDoc,
+  onFilesConvert,
+}) => {
   let viewer = useRef()
 
   useEffect(() => {
     window
       .WebViewer(
         {
-          path: '/WebViewer/lib',
-          initialDoc: '/sample.pdf',
+          path: `/${initialDoc.path}`,
+          initialDoc: `/${initialDoc.name}`,
           fullAPI: true,
         },
-        document.getElementById('hiddenViewer'),
+        document.getElementById('docViewer'),
       )
       .then(currentInstance => {
         viewer = currentInstance
 
         currentInstance.iframeWindow.addEventListener('loaderror', err => {
           currentInstance.showErrorMessage('An error has occurred: ', err)
+        })
+
+        // or listen to events from the viewer element
+        currentInstance.current.addEventListener('pageChanged', e => {
+          const [pageNumber] = e.detail
+          console.log(`Current page is ${pageNumber}`)
         })
       })
   }, [])
@@ -30,19 +43,35 @@ const UploaderConverter = () => {
     return blob
   }
 
-  const convertMsOfficeToPDF = (inputBuffer, fileName) =>
+  const saveFile = (blob, fileName) => {
+    downloadOnConvert && window.saveAs(blob, fileName)
+  }
+
+  const loadDocumentInViewer = (blob, fileName) => {
+    loadOnConvert && viewer.loadDocument(blob, { fileName: `${fileName}.pdf` })
+  }
+
+  const forwardToParent = (blob, fileName) => {
+    blob.name = fileName
+    typeof onFilesConvert === 'function' && onFilesConvert(blob)
+  }
+
+  const convertMsOfficeToPDF = (inputBuffer, fileName) => {
     viewer.CoreControls.office2PDFBuffer(inputBuffer, {
       l: '', //licence key (getting watermark on final PDF)
     }).then(buffer => {
       const currentBlob = getFileBlob({ buffer, type: 'application/pdf' })
-      // currentBlob.name = 'sampleDoc'
 
       // Load Document in Webviewer
-      //viewer.loadDocument(currentBlob, { fileName: `${fileName}.pdf` })
+      loadDocumentInViewer(currentBlob, fileName)
+
+      // Returned converted document
+      forwardToParent(currentBlob, fileName)
 
       // File Saver
-      window.saveAs(currentBlob, fileName) // FileSaver.min.js
+      saveFile(currentBlob, fileName) // FileSaver.min.js
     })
+  }
 
   const convertImageToPDF = (buffer, fileName) => {
     const currentBlob = getFileBlob({ buffer, type: 'image/jpeg' })
@@ -71,7 +100,7 @@ const UploaderConverter = () => {
       let img = await PDFNet.Image.createFromURL(doc, reader.result)
       let matrix = await PDFNet.Matrix2D.create(200, 0, 0, 250, 50, 500)
       const matrix2 = await PDFNet.Matrix2D.createZeroMatrix()
-      await matrix2.set(200, 0, 0, 250, 50, 500)
+      await matrix2.set(500, 0, 0, 350, 50, 250)
       let element = await builder.createImageFromMatrix(img, matrix2)
       element.setTextMatrix(matrix)
       writer.writePlacedElement(element)
@@ -89,10 +118,13 @@ const UploaderConverter = () => {
       })
 
       // Load Document in Webviewer
-      //viewer.loadDocument(currentBlob, { fileName: `${fileName}.pdf` })
+      loadDocumentInViewer(currentBlob, fileName)
+
+      // Returned converted document
+      forwardToParent(currentBlob, fileName)
 
       // File Saver
-      window.saveAs(currentBlob, fileName)
+      saveFile(currentBlob, fileName)
     }
   }
 
@@ -117,6 +149,7 @@ const UploaderConverter = () => {
           case 'png':
           case 'jpg':
           case 'jpeg':
+          case 'odt':
             convertImageToPDF(inputBuffer, fileName)
             break
           default:
@@ -130,21 +163,46 @@ const UploaderConverter = () => {
         console.log('An error was encountered! :(', err)
       })
   }
+
   return (
-    <div>
-      <h3>Upload Document here to convert in PDF format</h3>
-      <DropArea
-        onFileSelection={files => {
-          onFileSelection(files)
+    <div style={styles.parent}>
+      <div style={styles.uploader}>
+        <DropArea
+          onFileSelection={files => {
+            onFileSelection(files)
+          }}
+        ></DropArea>
+      </div>
+      <div
+        style={{
+          height: '100vh',
+          width: '100%',
+          border: '1px solid',
+          ...styles.viewer,
+          display: hideViewer ? 'none' : 'block',
         }}
-      ></DropArea>
-      <div id='hiddenViewer' style={{ display: 'none' }}></div>
+        id='docViewer'
+        ref={viewer}
+      ></div>
     </div>
   )
 }
 
-UploaderConverter.propTypes = {
-  onConversion: PropTypes.func,
+VandU.defaultProps = {
+  styles: { parent: {}, viewer: {}, uploader: {} },
+  initialDoc: {
+    path: 'WebViewer/lib',
+    name: 'sample.pdf',
+  },
 }
 
-export default UploaderConverter
+VandU.propTypes = {
+  hideViewer: PropTypes.bool,
+  downloadOnConvert: PropTypes.bool,
+  loadOnConvert: PropTypes.bool,
+  styles: PropTypes.object,
+  initialDoc: PropTypes.object,
+  onFilesConvert: PropTypes.func,
+}
+
+export default VandU
