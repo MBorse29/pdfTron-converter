@@ -6,6 +6,8 @@
     "cancel": "Отменить",
     "clear": "Очистить",
     "close": "Закрыть",
+    "undo": "Отменить",
+    "redo": "готов",
     "comment": "Откомментировать",
     "copy": "Скопировать",
     "delete": "Удалить",
@@ -20,13 +22,18 @@
     "fitToPage": "Уместить страницу",
     "fitToWidth": "Уместить по ширине",
     "openFile": "Открыть документ",
+    "pagePrev": "Предыдущая страница",
+    "pageNext": "Следующая страница",
+    "pageSet": "Установить страницу",
     "print": "Распечатать",
+    "name": "название",
     "ok": "OK",
     "reply": "Ответить",
     "rotate": "Повернуть",
     "rotateClockwise": "По часовой",
     "rotateCounterClockwise": "Против часовой",
     "save": "Сохранить",
+    "post": "Почта",
     "create": "Создать",
     "showMoreResults": "Показать больше",
     "sign": "Добавить подпись",
@@ -35,10 +42,19 @@
     "zoom": "Увеличить",
     "zoomIn": "Увеличить",
     "zoomOut": "Уменьшить",
+    "zoomSet": "Установить зум",
+    "zoomControls": "Управление масштабированием",
     "draw": "Привлечь",
     "type": "Тип",
     "upload": "Загрузить",
-    "link": "Ссылка на сайт"
+    "link": "Ссылка на сайт",
+    "darkMode": "Темный режим",
+    "lightMode": "Легкий режим",
+    "fileAttachmentDownload": "Скачать прикрепленный файл",
+    "prevResult": "Предыдущий результат",
+    "nextResult": "Следующий результат",
+    "prev": "предыдущий",
+    "next": "следующий"
   },
   "annotation": {
     "areaMeasurement": "Площадь",
@@ -47,14 +63,13 @@
     "crop": "Обрезать страницу",
     "caret": "Знак вставки",
     "distanceMeasurement": "Дистанция",
+    "countMeasurement": "Измерение счета",
     "ellipse": "Эллипс",
     "eraser": "ластик",
+    "fileattachment": "Файл вложения",
     "freehand": "От руки",
-    "freehand2": "От руки",
     "freetext": "Текст",
-    "freetext2": "Текст",
     "highlight": "Выделить",
-    "highlight2": "Выделить",
     "line": "Линия",
     "perimeterMeasurement": "Периметр",
     "polygon": "Многоугольник",
@@ -97,27 +112,26 @@
     "SBRejected": "Отклонено"
   },
   "component": {
-    "freehandToolsButton": "Инструменты",
     "leftPanel": "Панель",
+    "toolsHeader": "инструменты",
     "searchOverlay": "Поиск",
+    "searchPanel": "Поиск",
     "menuOverlay": "Меню",
-    "miscToolsButton": "Другие инструменты",
     "notesPanel": "Заметки",
     "outlinesPanel": "Контуры",
     "bookmarksPanel": "закладки",
     "newBookmark": "Новая закладка",
     "bookmarkPage": "страница",
     "layersPanel": "Слои",
-    "shapeToolsButton": "Фигуры",
-    "textToolsButton": "Инструменты для работы с текстом",
     "thumbnailsPanel": "Эскизы",
     "toolsButton": "Инструменты",
     "redaction": "Редактировать",
     "viewControlsOverlay": "Изменить вид",
-    "measurementToolsButton": "Инструменты для замерения",
-    "calibration": "калибровка"
+    "calibration": "калибровка",
+    "createStampButton": "Создать новую марку"
   },
   "message": {
+    "toolsOverlayNoPresets": "Нет пресетов",
     "badDocument": "Произошла ошибка при загрузке документа. Документ содержит ошибки или недостоверный.",
     "customPrintPlaceholder": "пример 3, 4-10",
     "encryptedAttemptsExceeded": "Не удалось загрузить зашифрованный документ. Слишком много попыток.",
@@ -127,6 +141,7 @@
     "noAnnotations": "Документ не имеет аннотаций.",
     "noOutlines": "Документ не имеет оглавления.",
     "noResults": "Поиск не вернул результатов.",
+    "numResultsFound": "найдены результаты",
     "notSupported": "Расширение файла не поддерживается.",
     "passwordRequired": "Пароль необходим",
     "preparingToPrint": "Документ печатается...",
@@ -136,7 +151,8 @@
     "printTotalPageCount_plural": "{{count}} страниц",
     "processing": "Обработка документа...",
     "searching": "Поиск...",
-    "searchPlaceholder": "Поиск комментарий...",
+    "searchCommentsPlaceholder": "Поиск комментариев",
+    "searchDocumentPlaceholder": "Искать документ",
     "signHere": "Распишетесь здесь",
     "insertTextHere": "Вставьте текст здесь",
     "imageSignatureAcceptedFileTypes": "Только {{acceptFileTypes}} принимаются",
@@ -144,6 +160,18 @@
     "linkURLorPage": "Ссылка URL или страница"
   },
   "option": {
+    "notesOrder": {
+      "position": "Позиция",
+      "time": "Время"
+    },
+    "toolbarGroup": {
+      "toolbarGroup-View": "Посмотреть",
+      "toolbarGroup-Annotate": "Пометки",
+      "toolbarGroup-Shapes": "Формы",
+      "toolbarGroup-Insert": "Вставить",
+      "toolbarGroup-Measure": "Мера",
+      "toolbarGroup-Edit": "редактировать"
+    },
     "annotationColor": {
       "StrokeColor": "Цвет границ",
       "FillColor": "Цвет заливки",
@@ -162,8 +190,6 @@
       "single": "Единый"
     },
     "notesPanel": {
-      "orderPosition": "Позиция",
-      "orderTime": "Время",
       "separator": {
         "today": "Сегодня",
         "yesterday": "Вчера"
@@ -177,6 +203,7 @@
       "all": "Все",
       "current": "Текущий",
       "pages": "Страницы",
+      "includeAnnotations": "Включить аннотации",
       "includeComments": "Приложить комментарии",
       "addWatermarkSettings": "Добавить настройки водяного знака"
     },
@@ -186,7 +213,10 @@
     "searchPanel": {
       "caseSensitive": "С учетом регистра",
       "wholeWordOnly": "Всё слово",
-      "wildcard": "Wildcard"
+      "wildcard": "Поиск по шаблону"
+    },
+    "stampOverlay": {
+      "addStamp": "Добавить новый штамп"
     },
     "signatureOverlay": {
       "addSignature": "Добавить подпись"
@@ -203,11 +233,11 @@
     "state": {
       "accepted": "Принято",
       "rejected": "Отклонено",
-      "completed": "Завершенный",
-      "cancelled": "отменен",
-      "set": "Установить статус:",
-      "setBy": "установить с помощью",
-      "none": "Никто"
+      "completed": "Завершенно",
+      "cancelled": "Отменено",
+      "set": "Поставить статус:",
+      "setBy": "статус поставлен",
+      "none": "Пустой"
     },
     "measurementOverlay": {
       "scale": "Масштаб",
@@ -217,14 +247,17 @@
       "area": "Площадь",
       "distanceMeasurement": "Замерение дистанции",
       "perimeterMeasurement": "Замерение периметера",
-      "areaMeasurement": "Замерение площади"
+      "areaMeasurement": "Замерение площади",
+      "countMeasurement": "Измерение счета",
+      "radius": "Радиус",
+      "count": "подсчитывать"
     },
     "measurementOption": {
       "scale": "Масштаб"
     },
     "styleOption": {
       "style": "Стиль",
-      "regular": "регулярное",
+      "solid": "твердый",
       "cloudy": "облачный"
     },
     "slider": {
@@ -234,7 +267,8 @@
     },
     "shared": {
       "page": "Страница",
-      "precision": "Точность"
+      "precision": "Точность",
+      "enableSnapping": "Включить привязку для измерительных инструментов"
     },
     "watermark": {
       "size": "Размер",
@@ -247,7 +281,22 @@
     "thumbnailPanel": {
       "delete": "удалять",
       "rotateClockwise": "по часовой стрелке",
-      "rotateCounterClockwise": "Против часовой стрелки"
+      "rotateCounterClockwise": "Против часовой стрелки",
+      "extractZeroPageError": "Страницы не были выбраны для извлечения"
+    },
+    "richText": {
+      "bold": "Жирное лицо",
+      "italic": "курсивный",
+      "underline": "Подчеркнутый",
+      "strikeout": "Зачеркнутый"
+    },
+    "customStampModal": {
+      "stampText": "Штамп текст:",
+      "timestampText": "Текст метки времени:",
+      "stampColor": "Цвет марки:",
+      "Username": "имя пользователя",
+      "Date": "Дата",
+      "Time": "Время"
     }
   },
   "warning": {
@@ -280,22 +329,68 @@
     "signature": "(S)",
     "squiggly": "(G)",
     "stamp": "(I)",
+    "redo": "(Ctrl Shift Z)",
+    "undo": "(Ctrl Z)",
     "stickyNote": "(N)",
     "strikeout": "(K)",
     "underline": "(U)",
     "zoomIn": "(Ctrl +)",
-    "zoomOut": "(Ctrl -)"
+    "zoomOut": "(Ctrl -)",
+    "richText": {
+      "bold": "(Ctrl B)",
+      "italic": "(Ctrl I)",
+      "underline": "(Ctrl L)",
+      "strikeout": "(Ctrl K)"
+    }
   },
   "tool": {
     "pan": "Панорамирование",
     "select": "Выделить",
     "Marquee": "Увеличить выделение",
-    "Link": "Ссылка URL или Страница"
+    "Link": "Ссылка URL или Страница",
+    "Standard": "стандарт",
+    "Custom": "изготовленный на заказ"
   },
   "link": {
     "url": "URL",
     "page": "страница",
     "enterurl": "Введите URL, на который вы хотите сослаться",
     "enterpage": "Выберите номер страницы, на которую вы хотите сослаться"
+  },
+  "datePicker": {
+    "previousMonth": "Предыдущий месяц",
+    "nextMonth": "Следующем месяце",
+    "months": {
+      "0": "январь",
+      "1": "февраль",
+      "2": "март",
+      "3": "апрель",
+      "4": "май",
+      "5": "июнь",
+      "6": "июль",
+      "7": "август",
+      "8": "сентябрь",
+      "9": "октябрь",
+      "10": "ноябрь",
+      "11": "декабрь"
+    },
+    "weekdays": {
+      "0": "воскресенье",
+      "1": "понедельник",
+      "2": "вторник",
+      "3": "среда",
+      "4": "четверг",
+      "5": "пятница",
+      "6": "суббота"
+    },
+    "weekdaysShort": {
+      "0": "вс",
+      "1": "пн",
+      "2": "вт",
+      "3": "ср",
+      "4": "чт",
+      "5": "пт",
+      "6": "сб"
+    }
   }
 }

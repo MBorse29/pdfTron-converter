@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { DropArea } from './DropArea'
+import WebViewer from '@pdftron/webviewer'
 
 const VandU = ({
   styles,
@@ -13,28 +14,26 @@ const VandU = ({
   let viewer = useRef()
 
   useEffect(() => {
-    window
-      .WebViewer(
-        {
-          path: `/${initialDoc.path}`,
-          initialDoc: `/${initialDoc.name}`,
-          fullAPI: true,
-        },
-        document.getElementById('docViewer'),
-      )
-      .then(currentInstance => {
-        viewer = currentInstance
+    WebViewer(
+      {
+        path: `/${initialDoc.path}`,
+        initialDoc: `/${initialDoc.name}`,
+        fullAPI: true,
+      },
+      document.getElementById('docViewer'),
+    ).then(currentInstance => {
+      viewer = currentInstance
 
-        currentInstance.iframeWindow.addEventListener('loaderror', err => {
-          currentInstance.showErrorMessage('An error has occurred: ', err)
-        })
-
-        // or listen to events from the viewer element
-        currentInstance.current.addEventListener('pageChanged', e => {
-          const [pageNumber] = e.detail
-          console.log(`Current page is ${pageNumber}`)
-        })
+      currentInstance.iframeWindow.addEventListener('loaderror', err => {
+        currentInstance.showErrorMessage('An error has occurred: ', err)
       })
+
+      // or listen to events from the viewer element
+      currentInstance.current.addEventListener('pageChanged', e => {
+        const [pageNumber] = e.detail
+        console.log(`Current page is ${pageNumber}`)
+      })
+    })
   }, [])
 
   const getFileBlob = ({ buffer, type }) => {

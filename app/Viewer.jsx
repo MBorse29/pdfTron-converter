@@ -1,47 +1,42 @@
 import React, { useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
+import WebViewer from '@pdftron/webviewer'
 
-const Viewer = ({ docPath, docName, fileBlob }) => {
+const Viewer = ({ docPath, docName, getViewerReference }) => {
   let viewerInstance = useRef()
-  console.log('viewerInstance', viewerInstance)
-  useEffect(() => {
-    viewerInstance &&
-      viewerInstance.loadDocument &&
-      viewerInstance.loadDocument(fileBlob, fileBlob.name)
-  }, [fileBlob])
 
   useEffect(() => {
-    window
-      .WebViewer(
-        {
-          path: docPath || '/WebViewer/lib',
-          initialDoc: docName || '/sample.pdf',
-          fullAPI: true,
-        },
-        document.getElementById('myWebViewer'),
-      )
-      .then(currentInstance => {
-        viewerInstance = currentInstance
+    WebViewer(
+      {
+        path: docPath || '/WebViewer/lib',
+        initialDoc: docName || '/sample.pdf',
+        fullAPI: true,
+      },
+      document.getElementById('myWebViewer'),
+    ).then(currentInstance => {
+      typeof getViewerReference === 'function' &&
+        getViewerReference(currentInstance)
 
-        currentInstance.iframeWindow.addEventListener('loaderror', err => {
-          // Do something with error. eg. instance.showErrorMessage('An error has occurred')
-          currentInstance.showErrorMessage('An error has occurred: ', err)
-        })
-
-        // or listen to events from the viewer element
-        // viewer.current.addEventListener('pageChanged', e => {
-        //   const [pageNumber] = e.detail
-        //   console.log(`Current page is ${pageNumber}`)
-        // })
+      currentInstance.iframeWindow.addEventListener('loaderror', err => {
+        // Do something with error. eg. instance.showErrorMessage('An error has occurred')
+        currentInstance.showErrorMessage('An error has occurred: ', err)
       })
+
+      /*
+      //or listen to events from the viewer element
+        currentInstance.current.addEventListener('pageChanged', e => {
+          const [pageNumber] = e.detail
+          console.log(`Current page is ${pageNumber}`)
+        })
+      */
+    })
   }, [])
 
   return (
     <div style={{ width: '100%', height: '100%' }}>
       <div
-        className='viewerStyles'
         id='myWebViewer'
-        // ref={viewerInstance}
+        ref={viewerInstance}
         style={{
           height: 'calc(100vh - 200px)',
           width: '100%',
@@ -55,7 +50,7 @@ const Viewer = ({ docPath, docName, fileBlob }) => {
 Viewer.propTypes = {
   docPath: PropTypes.string,
   docName: PropTypes.string,
-  fileBlob: PropTypes.object,
+  getViewerReference: PropTypes.func,
 }
 
 export default Viewer

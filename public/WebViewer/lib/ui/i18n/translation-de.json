@@ -6,6 +6,8 @@
     "cancel": "Abbrechen",
     "clear": "Löschen",
     "close": "Schliessen",
+    "undo": "Rückgängig machen",
+    "redo": "Bereit",
     "comment": "Kommentar",
     "copy": "Kopieren",
     "delete": "Löschen",
@@ -13,32 +15,46 @@
     "ungroup": "Gruppierung aufheben",
     "download": "Download",
     "edit": "Bearbeiten",
-    "extract": "Extrakt",
+    "extract": "Extrahieren",
     "enterFullscreen": "Vollbildansicht",
     "exitFullscreen": "Vollbildansicht beenden",
     "fit": "Anpassen",
     "fitToPage": "An Seite anpassen",
     "fitToWidth": "An Breite anpassen",
     "openFile": "Datei öffnen",
+    "pagePrev": "Vorherige Seite",
+    "pageNext": "Nächste Seite",
+    "pageSet": "Seite einstellen",
     "print": "Drucken",
+    "name": "Name",
     "ok": "OK",
     "reply": "Antwort",
     "rotate": "Drehen",
     "rotateClockwise": "Im Uhrzeigersinn",
     "rotateCounterClockwise": "Gegen den Uhrzeigersinn",
     "save": "Speichern",
+    "post": "Post",
     "create": "Erzeugen",
     "showMoreResults": "Mehr Ergebnisse anzeigen",
     "sign": "Unterschrift",
     "style": "Stil",
-    "submit": "Abgeben",
+    "submit": "OK",
     "zoom": "Zoom",
     "zoomIn": "Heranzoomen",
     "zoomOut": "Rauszoomen",
+    "zoomSet": "Stellen Sie den Zoom ein",
+    "zoomControls": "Zoomsteuerung",
     "draw": "Zeichnen",
     "type": "Art",
     "upload": "Hochladen",
-    "link": "Verknüpfung"
+    "link": "Verknüpfung",
+    "darkMode": "Dunkler Modus",
+    "lightMode": "Lichtmodus",
+    "fileAttachmentDownload": "Laden Sie die angehängte Datei herunter",
+    "prevResult": "Vorheriges Ergebnis",
+    "nextResult": "Nächstes Ergebnis",
+    "prev": "Bisherige",
+    "next": "Nächster"
   },
   "annotation": {
     "areaMeasurement": "Flächenmessung",
@@ -47,14 +63,13 @@
     "crop": "Seite zuschneiden",
     "caret": "Caret",
     "distanceMeasurement": "Abstandsmessung",
+    "countMeasurement": "Zählmessung",
     "ellipse": "Ellipse",
     "eraser": "Radiergummi",
+    "fileattachment": "Dateianhang",
     "freehand": "Freihandzeichnen",
-    "freehand2": "Freihandzeichnen",
     "freetext": "Freitext",
-    "freetext2": "Freitext",
     "highlight": "Hervorheben",
-    "highlight2": "Hervorheben",
     "line": "Linie",
     "perimeterMeasurement": "Umfangsmessung",
     "polygon": "Polygon",
@@ -67,7 +82,7 @@
     "stamp": "Stempel",
     "stickyNote": "Kommentar",
     "strikeout": "Durchstreichen",
-    "underline": "Unterstreichen",
+    "underline": "Unterstrichen",
     "custom": "Angepasst",
     "rubberStamp": "Stempel"
   },
@@ -78,11 +93,11 @@
     "Confidential": "Geheim",
     "Departmental": "Abteilung",
     "Draft": "Entwurf",
-    "Experimental": "Experimental",
+    "Experimental": "Experimentell",
     "Expired": "Abgelaufen",
     "Final": "Finale",
     "ForComment": "Für Kommentar",
-    "ForPublicRelease": "Zur öffentlichen Veröffentlichung",
+    "ForPublicRelease": "Zur Veröffentlichung",
     "InformationOnly": "Nur Informationen",
     "NotApproved": "Nicht bestätigt",
     "NotForPublicRelease": "Nicht zur Veröffentlichung",
@@ -97,46 +112,47 @@
     "SBRejected": "Abgelehnt"
   },
   "component": {
-    "freehandToolsButton": "Freihand-Werkzeuge",
     "leftPanel": "Linke Leiste",
+    "toolsHeader": "Werkzeuge",
     "searchOverlay": "Suche",
+    "searchPanel": "Suche",
     "menuOverlay": "Menü",
-    "miscToolsButton": "Verschiedene Werkzeuge",
     "notesPanel": "Annotationen",
     "outlinesPanel": "Gliederung",
     "bookmarksPanel": "Lesezeichen",
     "newBookmark": "Neues Lesezeichen",
     "bookmarkPage": "Seite",
     "layersPanel": "Schichten",
-    "shapeToolsButton": "Formwerkzeuge",
-    "textToolsButton": "Textwerkzeuge",
     "thumbnailsPanel": "Miniaturansicht",
     "toolsButton": "Werkzeuge",
     "redaction": "Schwärzen",
     "viewControlsOverlay": "Anzeigeoptionen",
-    "measurementToolsButton": "Messwerkzeuge",
-    "calibration": "Kalibrierung"
+    "calibration": "Kalibrierung",
+    "createStampButton": "Neuen Stempel erstellen"
   },
   "message": {
+    "toolsOverlayNoPresets": "Keine Voreinstellungen",
     "badDocument": "Fehler beim Laden des Dokuments. Das Dokument ist entweder defekt oder ungültig.",
     "customPrintPlaceholder": "z.B. 3, 4-10",
-    "encryptedAttemptsExceeded": "Fehler beim Laden des verlüsselten Dokuments. Zu viele Versuche.",
-    "encryptedUserCancelled": "Fehler beim Laden des verlüsselten Dokuments. Passworteingabe wurde abgebrochen.",
+    "encryptedAttemptsExceeded": "Fehler beim Laden des verschlüsselten Dokuments. Zu viele Versuche.",
+    "encryptedUserCancelled": "Fehler beim Laden des verschlüsselten Dokuments. Passworteingabe wurde abgebrochen.",
     "enterPassword": "Dieses Dokument ist durch ein Passwort geschützt. Bitte geben Sie ein Passwort ein",
-    "incorrectPassword": "Falsches Passwort, Verbleibende Versuche: {{ remainingAttempts }}",
+    "incorrectPassword": "Falsches Passwort, verbleibende Versuche: {{ remainingAttempts }}",
     "noAnnotations": "Dieses Dokument hat keine Annotationen.",
     "noOutlines": "Dieses Dokument enthält keine Gliederung.",
     "noResults": "Keine Ergebnisse gefunden.",
+    "numResultsFound": "gefundene Ergebnisse",
     "notSupported": "Dieser Dateityp ist nicht unterstützt.",
     "passwordRequired": "Passwort erforderlich",
     "preparingToPrint": "Druckvorbereitung...",
-    "annotationReplyCount": "{{count}} Antworten",
+    "annotationReplyCount": "{{count}} Antwort",
     "annotationReplyCount_plural": "{{count}} Antworten",
     "printTotalPageCount": "{{count}} Seite",
     "printTotalPageCount_plural": "{{count}} Seiten",
     "processing": "Bearbeite...",
     "searching": "Suche...",
-    "searchPlaceholder": "Suche Kommentare...",
+    "searchCommentsPlaceholder": "Kommentare suchen",
+    "searchDocumentPlaceholder": "Dokument suchen",
     "signHere": "Hier unterschreiben",
     "insertTextHere": "Hier Text eingeben",
     "imageSignatureAcceptedFileTypes": "Es werden nur {{allowedFileTypes}} akzeptiert",
@@ -144,6 +160,18 @@
     "linkURLorPage": "Link URL oder eine Seite"
   },
   "option": {
+    "notesOrder": {
+      "position": "Position",
+      "time": "Zeit"
+    },
+    "toolbarGroup": {
+      "toolbarGroup-View": "Aussicht",
+      "toolbarGroup-Annotate": "Kommentieren",
+      "toolbarGroup-Shapes": "Formen",
+      "toolbarGroup-Insert": "Einfügen",
+      "toolbarGroup-Measure": "Messen",
+      "toolbarGroup-Edit": "Bearbeiten"
+    },
     "annotationColor": {
       "StrokeColor": "Randfarbe",
       "FillColor": "Füllfarbe",
@@ -162,8 +190,6 @@
       "single": "Einseitig"
     },
     "notesPanel": {
-      "orderPosition": "Position",
-      "orderTime": "Zeit",
       "separator": {
         "today": "Heute",
         "yesterday": "Gestern"
@@ -177,6 +203,7 @@
       "all": "Alle",
       "current": "Aktuelle Seite",
       "pages": "Seiten",
+      "includeAnnotations": "Fügen Sie Anmerkungen hinzu",
       "includeComments": "Kommentare einfügen",
       "addWatermarkSettings": "Wasserzeicheneinstellungen hinzufügen"
     },
@@ -184,9 +211,12 @@
       "markForRedaction": "Zum Schwärzen markieren"
     },
     "searchPanel": {
-      "caseSensitive": "Groß-/Klein- schreibung beachten",
+      "caseSensitive": "Groß-/Kleinschreibung beachten",
       "wholeWordOnly": "Ganzes Wort",
       "wildcard": "Platzhalter"
+    },
+    "stampOverlay": {
+      "addStamp": "Neuen Stempel hinzufügen"
     },
     "signatureOverlay": {
       "addSignature": "Eine Unterschrift hinzufügen"
@@ -201,10 +231,10 @@
       "status": "Status"
     },
     "state": {
-      "accepted": "Akzeptiert",
+      "accepted": "Angenommen",
       "rejected": "Abgelehnt",
-      "completed": "Vollendet, fertiggestellt",
-      "cancelled": "Abgesagt",
+      "completed": "Abgeschlossen",
+      "cancelled": "Abgebrochen",
       "set": "Status setzen:",
       "setBy": "eingestellt von",
       "none": "Keiner"
@@ -217,14 +247,17 @@
       "area": "Fläche",
       "distanceMeasurement": "Abstandsmessung",
       "perimeterMeasurement": "Umfangsmessung",
-      "areaMeasurement": "Flächenmessung"
+      "areaMeasurement": "Flächenmessung",
+      "countMeasurement": "Zählmessung",
+      "radius": "Radius",
+      "count": "Anzahl"
     },
     "measurementOption": {
       "scale": "Maßstab"
     },
     "styleOption": {
       "style": "Stil",
-      "regular": "Regulär",
+      "solid": "Regulär",
       "cloudy": "Wolkig"
     },
     "slider": {
@@ -234,7 +267,8 @@
     },
     "shared": {
       "page": "Seite",
-      "precision": "Genauigkeit"
+      "precision": "Genauigkeit",
+      "enableSnapping": "Aktivieren Sie das Einrasten für Messwerkzeuge"
     },
     "watermark": {
       "size": "Größe",
@@ -247,7 +281,22 @@
     "thumbnailPanel": {
       "delete": "Löschen",
       "rotateClockwise": "Im Uhrzeigersinn",
-      "rotateCounterClockwise": "Gegen den Uhrzeigersinn"
+      "rotateCounterClockwise": "Gegen den Uhrzeigersinn",
+      "extractZeroPageError": "Es wurden keine Seiten zum Extrahieren ausgewählt"
+    },
+    "richText": {
+      "bold": "Fett",
+      "italic": "Kursiv",
+      "underline": "Unterstrichen",
+      "strikeout": "Durchgestrichen"
+    },
+    "customStampModal": {
+      "stampText": "Stempeltext:",
+      "timestampText": "Zeitstempeltext:",
+      "stampColor": "Stempelfarbe:",
+      "Username": "Nutzername",
+      "Date": "Datum",
+      "Time": "Zeit"
     }
   },
   "warning": {
@@ -257,14 +306,14 @@
       "deleteLastPageMessage": "Dies würde dazu führen, dass keine Seiten verbleiben. Bitte hinterlassen Sie mindestens eine Seite"
     },
     "redaction": {
-      "applyTile": "Redaktion anwenden",
-      "applyMessage": "Durch diese Aktion werden alle zur Bearbeitung ausgewählten Elemente dauerhaft entfernt. Es kann nicht ungeschehen gemacht werden."
+      "applyTile": "Schwärzung anwenden",
+      "applyMessage": "Durch diese Aktion werden alle zur Bearbeitung ausgewählten Elemente dauerhaft entfernt. Es kann nicht rückgängig gemacht werden."
     }
   },
   "shortcut": {
     "arrow": "(A)",
     "callout": "(C)",
-    "copy": "(Ctrl C)",
+    "copy": "(Strg C)",
     "delete": "(Del)",
     "ellipse": "(O)",
     "eraser": "(E)",
@@ -274,28 +323,74 @@
     "line": "(L)",
     "pan": "(P)",
     "rectangle": "(R)",
-    "rotateClockwise": "(Ctrl Shift +)",
-    "rotateCounterClockwise": "(Ctrl Shift -)",
+    "rotateClockwise": "(Strg Shift +)",
+    "rotateCounterClockwise": "(Strg Shift -)",
     "select": "(Esc)",
     "signature": "(S)",
     "squiggly": "(G)",
     "stamp": "(I)",
+    "redo": "(Strg-Umschalttaste Z)",
+    "undo": "(Strg Z)",
     "stickyNote": "(N)",
     "strikeout": "(K)",
     "underline": "(U)",
-    "zoomIn": "(Ctrl +)",
-    "zoomOut": "(Ctrl -)"
+    "zoomIn": "(Strg +)",
+    "zoomOut": "(Strg -)",
+    "richText": {
+      "bold": "(Strg B)",
+      "italic": "(Strg I)",
+      "underline": "(Strg L)",
+      "strikeout": "(Strg K)"
+    }
   },
   "tool": {
     "pan": "Hand",
     "select": "Auswählen",
     "Marquee": "Auswahl Zoom",
-    "Link": "Link URL oder Seite"
+    "Link": "Link URL oder Seite",
+    "Standard": "Standard",
+    "Custom": "Benutzerdefiniert"
   },
   "link": {
     "url": "URL",
     "page": "Seite",
     "enterurl": "Geben Sie die URL ein, zu der Sie einen Link erstellen möchten",
     "enterpage": "Wählen Sie die Seitennummer aus, zu der Sie einen Link erstellen möchten"
+  },
+  "datePicker": {
+    "previousMonth": "Vorheriger Monat",
+    "nextMonth": "Nächster Monat",
+    "months": {
+      "0": "Januar",
+      "1": "Februar",
+      "2": "März",
+      "3": "April",
+      "4": "Mai",
+      "5": "Juni",
+      "6": "Juli",
+      "7": "August",
+      "8": "September",
+      "9": "Oktober",
+      "10": "November",
+      "11": "Dezember"
+    },
+    "weekdays": {
+      "0": "Sonntag",
+      "1": "Montag",
+      "2": "Dienstag",
+      "3": "Mittwoch",
+      "4": "Donnerstag",
+      "5": "Freitag",
+      "6": "Samstag"
+    },
+    "weekdaysShort": {
+      "0": "So.",
+      "1": "Mo.",
+      "2": "Di.",
+      "3": "Mi.",
+      "4": "Do.",
+      "5": "Fr.",
+      "6": "Sa."
+    }
   }
 }

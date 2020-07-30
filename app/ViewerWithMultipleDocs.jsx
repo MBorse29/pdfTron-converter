@@ -1,19 +1,22 @@
-import React, { Fragment, useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
+import React, { Fragment, useState } from 'react'
 import { DropArea } from './DropArea'
 import Viewer from './Viewer'
 
 const ViewerWithMultipleDocs = () => {
-  const [blob, setBlob] = useState(null)
+  // let instance = useRef()
+  const [ref, setRef] = useState(null)
+  const setInstance = ref => setRef(ref)
+  const [file, setFile] = useState(null)
   return (
     <Fragment>
       <DropArea
         onFileSelection={files => {
           console.log('current one', files[0])
-          setBlob(files[0])
+          ref && ref.loadDocument(files[0], files[0].name)
+          setFile(files[0])
         }}
       />
-      <Viewer fileBlob={blob || {}} />
+      <Viewer getViewerReference={setInstance} />
     </Fragment>
   )
 }
