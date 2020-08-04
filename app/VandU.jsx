@@ -29,7 +29,7 @@ const VandU = ({
       })
 
       // or listen to events from the viewer element
-      currentInstance.current.addEventListener('pageChanged', e => {
+      currentInstance.iframeWindow.addEventListener('pageChanged', e => {
         const [pageNumber] = e.detail
         console.log(`Current page is ${pageNumber}`)
       })
