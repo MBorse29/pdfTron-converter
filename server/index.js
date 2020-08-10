@@ -39,7 +39,7 @@ const WebpackMiddleware = require('webpack-dev-middleware')(compiler, {
 app.use(WebpackMiddleware)
 app.use(require('webpack-hot-middleware')(compiler))
 
-function parseConditionals (str, data) {
+function parseConditionals(str, data) {
   return str.replace(
     /({{#if (\w+)}})([^]+)({{\/if}})/gm,
     (match, p1, p2, p3) => {
@@ -56,10 +56,12 @@ WebpackMiddleware.waitUntilValid(() => {
 
   app.get('*', cors(), (req, res) => {
     // handling for static files in dev server
-    if (/public\/index\.html$/.test(req.path) || req.path === '/') {
-      // if (/.(png|ico|xml|json|js)$/.test(req.path)) {
-      //   res.sendFile(path.resolve(__dirname, `../public${req.path}`))
-      // }
+    if (
+      /.(png|ico|xml|json|js|pdf)$/.test(req.path) ||
+      req.path.indexOf('/WebViewer/lib/') !== -1
+    ) {
+      res.sendFile(path.resolve(__dirname, `../public${req.path}`))
+    } else {
       const cookies = req.cookies
       const locale = cookies.I18N_MOCK || 'en_US'
 
@@ -81,7 +83,6 @@ WebpackMiddleware.waitUntilValid(() => {
           if (err) {
             return err
           }
-
           const response = Object.keys(settings).reduce((str, key) => {
             const regex = new RegExp(`{{ ${key} }}`, 'gm')
             return str.replace(regex, settings[key])
@@ -90,8 +91,6 @@ WebpackMiddleware.waitUntilValid(() => {
           res.send(parseConditionals(response, settings))
         },
       )
-    } else {
-      res.sendFile(path.resolve(__dirname, `../public${req.path}`))
     }
   })
 
