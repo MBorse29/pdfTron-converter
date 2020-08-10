@@ -56,7 +56,8 @@ const VandU = ({
   }
 
   const convertMsOfficeToPDF = (inputBuffer, fileName) => {
-    viewer.CoreControls.office2PDFBuffer(inputBuffer, {
+    return viewer.CoreControls.office2PDFBuffer(inputBuffer, {
+      extension: 'pdf',
       l: '', //licence key (getting watermark on final PDF)
     }).then(buffer => {
       const currentBlob = getFileBlob({ buffer, type: 'application/pdf' })
@@ -69,94 +70,111 @@ const VandU = ({
 
       // File Saver
       saveFile(currentBlob, fileName) // FileSaver.min.js
+
+      return currentBlob
     })
   }
 
   const convertImageToPDF = (buffer, fileName) => {
-    const currentBlob = getFileBlob({ buffer, type: 'image/jpeg' })
+    return new Promise((resolve, reject) => {
+      const currentBlob = getFileBlob({ buffer, type: 'image/jpeg' })
 
-    const reader = new FileReader()
-    reader.readAsDataURL(currentBlob)
-    reader.onloadend = async () => {
-      // result includes identifier 'data:image/png;base64,' plus the base64 data
-      //console.log(reader.result)
+      const reader = new FileReader()
+      reader.readAsDataURL(currentBlob)
+      reader.onloadend = async () => {
+        // result includes identifier 'data:image/png;base64,' plus the base64 data
+        //console.log(reader.result)
 
-      const PDFNet = viewer.PDFNet
-      const doc = await PDFNet.PDFDoc.create()
-      doc.initSecurityHandler()
-      doc.lock()
+        const PDFNet = viewer.PDFNet
+        const doc = await PDFNet.PDFDoc.create()
+        doc.initSecurityHandler()
+        doc.lock()
 
-      const builder = await PDFNet.ElementBuilder.create() // ElementBuilder, used to build new element Objects
-      // create a new page writer that allows us to add/change page elements
-      const writer = await PDFNet.ElementWriter.create() // ElementWriter, used to write elements to the page
-      // define new page dimensions
-      const pageRect = await PDFNet.Rect.init(0, 0, 612, 794)
-      let page = await doc.pageCreate(pageRect)
+        const builder = await PDFNet.ElementBuilder.create() // ElementBuilder, used to build new element Objects
+        // create a new page writer that allows us to add/change page elements
+        const writer = await PDFNet.ElementWriter.create() // ElementWriter, used to write elements to the page
+        // define new page dimensions
+        const pageRect = await PDFNet.Rect.init(0, 0, 612, 794)
+        let page = await doc.pageCreate(pageRect)
 
-      writer.beginOnPage(page, PDFNet.ElementWriter.WriteMode.e_overlay)
+        writer.beginOnPage(page, PDFNet.ElementWriter.WriteMode.e_overlay)
 
-      // Adding a JPEG image to output file
-      let img = await PDFNet.Image.createFromURL(doc, reader.result)
-      let matrix = await PDFNet.Matrix2D.create(200, 0, 0, 250, 50, 500)
-      const matrix2 = await PDFNet.Matrix2D.createZeroMatrix()
-      await matrix2.set(500, 0, 0, 350, 50, 250)
-      let element = await builder.createImageFromMatrix(img, matrix2)
-      element.setTextMatrix(matrix)
-      writer.writePlacedElement(element)
+        // Adding a JPEG image to output file
+        let img = await PDFNet.Image.createFromURL(doc, reader.result)
+        let matrix = await PDFNet.Matrix2D.create(200, 0, 0, 250, 50, 500)
+        const matrix2 = await PDFNet.Matrix2D.createZeroMatrix()
+        await matrix2.set(500, 0, 0, 350, 50, 250)
+        let element = await builder.createImageFromMatrix(img, matrix2)
+        element.setTextMatrix(matrix)
+        writer.writePlacedElement(element)
 
-      writer.end()
-      doc.pagePushBack(page) // add the page to the document
+        writer.end()
+        doc.pagePushBack(page) // add the page to the document
 
-      const docbuf = await doc.saveMemoryBuffer(
-        PDFNet.SDFDoc.SaveOptions.e_linearized,
-      )
+        const docbuf = await doc.saveMemoryBuffer(
+          PDFNet.SDFDoc.SaveOptions.e_linearized,
+        )
 
-      const currentBlob = getFileBlob({
-        buffer: docbuf,
-        type: 'application/pdf',
-      })
+        const currentBlob = getFileBlob({
+          buffer: docbuf,
+          type: 'application/pdf',
+        })
 
-      // Load Document in Webviewer
-      loadDocumentInViewer(currentBlob, fileName)
+        // Load Document in Webviewer
+        loadDocumentInViewer(currentBlob, fileName)
 
-      // Returned converted document
-      forwardToParent(currentBlob, fileName)
+        // Returned converted document
+        forwardToParent(currentBlob, fileName)
 
-      // File Saver
-      saveFile(currentBlob, fileName)
-    }
+        // File Saver
+        saveFile(currentBlob, fileName)
+
+        resolve(currentBlob)
+      }
+    })
+  }
+
+  const getArrayBuffer = fileInstance =>
+    new Response(fileInstance).arrayBuffer()
+
+  const convertToPDF = ({ currentFile, fileName, fileExtension }) => {
+    return getArrayBuffer(currentFile).then(inputBuffer => {
+      switch (fileExtension) {
+        case 'xlsx':
+        case 'pptx':
+        case 'ppt':
+        case 'doc':
+        case 'docx':
+          return convertMsOfficeToPDF(inputBuffer, fileName)
+        case 'png':
+        case 'jpg':
+        case 'jpeg':
+        case 'odt':
+          return convertImageToPDF(inputBuffer, fileName)
+        default:
+          alert(`${fileExtension} files not handled yet`)
+      }
+    })
+    // .then((convertedDoc)=>convertedDoc)
   }
 
   const onFileSelection = files => {
     console.log('files', files)
     //Currently on single file
-    const names = files[0].name.split('.')
-    const fileName = names[0]
-    const fileExtension = names[names.length - 1].toLowerCase()
 
     viewer.PDFNet.initialize()
-      .then(() => new Response(files[0]).arrayBuffer())
-      .then(inputBuffer => {
-        switch (fileExtension) {
-          case 'xlsx':
-          case 'pptx':
-          case 'ppt':
-          case 'doc':
-          case 'docx':
-            convertMsOfficeToPDF(inputBuffer, fileName)
-            break
-          case 'png':
-          case 'jpg':
-          case 'jpeg':
-          case 'odt':
-            convertImageToPDF(inputBuffer, fileName)
-            break
-          default:
-            alert(`${fileExtension} files not handled yet`)
-        }
-      })
-      .then(() => {
-        console.log('File Conversion successfully!')
+      .then(() =>
+        Promise.all(
+          Array.from(files).map(currentFile => {
+            const names = currentFile.name.split('.')
+            const fileName = names[0]
+            const fileExtension = names[names.length - 1].toLowerCase()
+            return convertToPDF({ currentFile, fileName, fileExtension })
+          }),
+        ),
+      )
+      .then(convertedDoc => {
+        console.log('File Conversion successfully!', convertedDoc)
       })
       .catch(err => {
         console.log('An error was encountered! :(', err)
@@ -170,6 +188,7 @@ const VandU = ({
           onFileSelection={files => {
             onFileSelection(files)
           }}
+          allowMultiple
         ></DropArea>
       </div>
       <div
