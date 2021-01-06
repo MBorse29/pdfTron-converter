@@ -17,7 +17,7 @@
     "@hot-loader/react-dom": "^16.8.4",
     "@nivo/line": "^0.51.0",
     "@pdftron/webviewer": "^7.0.0",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "cors": "2.8.5",
     "emotion-theming": "^9.2.9",
     "exif-js": "^2.3.0",
